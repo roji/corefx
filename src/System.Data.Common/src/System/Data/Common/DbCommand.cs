@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Threading;
 
+#nullable enable
+
 namespace System.Data.Common
 {
     public abstract class DbCommand : Component, IDbCommand
@@ -16,7 +18,7 @@ namespace System.Data.Common
 
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.All)]
-        public abstract string CommandText { get; set; }
+        public abstract string? CommandText { get; set; }
 
         public abstract int CommandTimeout { get; set; }
 
@@ -27,23 +29,23 @@ namespace System.Data.Common
         [Browsable(false)]
         [DefaultValue(null)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DbConnection Connection
+        public DbConnection? Connection
         {
             get { return DbConnection; }
             set { DbConnection = value; }
         }
 
-        IDbConnection IDbCommand.Connection
+        IDbConnection? IDbCommand.Connection
         {
             get { return DbConnection; }
             set { DbConnection = (DbConnection)value; }
         }
 
-        protected abstract DbConnection DbConnection { get; set; }
+        protected abstract DbConnection? DbConnection { get; set; }
 
         protected abstract DbParameterCollection DbParameterCollection { get; }
 
-        protected abstract DbTransaction DbTransaction { get; set; }
+        protected abstract DbTransaction? DbTransaction { get; set; }
 
         // By default, the cmd object is visible on the design surface (i.e. VS7 Server Tray)
         // to limit the number of components that clutter the design surface,
@@ -64,13 +66,13 @@ namespace System.Data.Common
         [Browsable(false)]
         [DefaultValue(null)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DbTransaction Transaction
+        public DbTransaction? Transaction
         {
             get { return DbTransaction; }
             set { DbTransaction = value; }
         }
 
-        IDbTransaction IDbCommand.Transaction
+        IDbTransaction? IDbCommand.Transaction
         {
             get { return DbTransaction; }
             set { DbTransaction = (DbTransaction)value; }
@@ -187,14 +189,14 @@ namespace System.Data.Common
             }
         }
 
-        public Task<object> ExecuteScalarAsync() =>
+        public Task<object?> ExecuteScalarAsync() =>
             ExecuteScalarAsync(CancellationToken.None);
 
-        public virtual Task<object> ExecuteScalarAsync(CancellationToken cancellationToken)
+        public virtual Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                return ADP.CreatedTaskWithCancellation<object>();
+                return ADP.CreatedTaskWithCancellation<object?>();
             }
             else
             {
@@ -206,11 +208,11 @@ namespace System.Data.Common
 
                 try
                 {
-                    return Task.FromResult<object>(ExecuteScalar());
+                    return Task.FromResult<object?>(ExecuteScalar());
                 }
                 catch (Exception e)
                 {
-                    return Task.FromException<object>(e);
+                    return Task.FromException<object?>(e);
                 }
                 finally
                 {
@@ -219,7 +221,7 @@ namespace System.Data.Common
             }
         }
 
-        public abstract object ExecuteScalar();
+        public abstract object? ExecuteScalar();
 
         public abstract void Prepare();
 

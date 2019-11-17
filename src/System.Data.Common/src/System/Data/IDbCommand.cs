@@ -2,13 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
+
 namespace System.Data
 {
     public interface IDbCommand : IDisposable
     {
-        IDbConnection Connection { get; set; }
-        IDbTransaction Transaction { get; set; }
-        string CommandText { get; set; }
+        IDbConnection? Connection { get; set; }
+        IDbTransaction? Transaction { get; set; }
+        string? CommandText { get; set; }
         int CommandTimeout { get; set; }
         CommandType CommandType { get; set; }
         IDataParameterCollection Parameters { get; }
@@ -19,6 +21,6 @@ namespace System.Data
         int ExecuteNonQuery();
         IDataReader ExecuteReader();
         IDataReader ExecuteReader(CommandBehavior behavior);
-        object ExecuteScalar();
+        object? ExecuteScalar();
     }
 }

@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace System.Data.Common
 {
     public abstract class DbConnection : Component, IDbConnection
@@ -45,7 +47,7 @@ namespace System.Data.Common
         [Browsable(false)]
         public abstract ConnectionState State { get; }
 
-        public virtual event StateChangeEventHandler StateChange;
+        public virtual event StateChangeEventHandler? StateChange;
 
         protected abstract DbTransaction BeginDbTransaction(IsolationLevel isolationLevel);
 
@@ -150,7 +152,7 @@ namespace System.Data.Common
             throw ADP.NotSupported();
         }
 
-        public virtual DataTable GetSchema(string collectionName, string[] restrictionValues)
+        public virtual DataTable GetSchema(string collectionName, string?[] restrictionValues)
         {
             throw ADP.NotSupported();
         }

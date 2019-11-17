@@ -4,6 +4,8 @@
 
 using System.ComponentModel;
 
+#nullable enable
+
 namespace System.Data.Common
 {
     public abstract class DbParameter : MarshalByRefObject, IDbDataParameter
@@ -73,6 +75,6 @@ namespace System.Data.Common
 
         [DefaultValue(null)]
         [RefreshProperties(RefreshProperties.All)]
-        public abstract object Value { get; set; }
+        public abstract object? Value { get; set; }
     }
 }

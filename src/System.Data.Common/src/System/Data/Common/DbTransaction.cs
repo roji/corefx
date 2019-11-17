@@ -5,17 +5,19 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace System.Data.Common
 {
     public abstract class DbTransaction : MarshalByRefObject, IDbTransaction
     {
         protected DbTransaction() : base() { }
 
-        public DbConnection Connection => DbConnection;
+        public DbConnection? Connection => DbConnection;
 
-        IDbConnection IDbTransaction.Connection => DbConnection;
+        IDbConnection? IDbTransaction.Connection => DbConnection;
 
-        protected abstract DbConnection DbConnection { get; }
+        protected abstract DbConnection? DbConnection { get; }
 
         public abstract IsolationLevel IsolationLevel { get; }
 

@@ -8,6 +8,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 
+#nullable enable
+
 namespace System.Data.Common
 {
     public abstract class DbDataReader : MarshalByRefObject, IDataReader, IEnumerable
@@ -73,7 +75,7 @@ namespace System.Data.Common
 
         public abstract int GetOrdinal(string name);
 
-        public virtual DataTable GetSchemaTable()
+        public virtual DataTable? GetSchemaTable()
         {
             throw new NotSupportedException();
         }

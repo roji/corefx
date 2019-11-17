@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
+
 namespace System.Data
 {
     public interface IDataReader : IDisposable, IDataRecord
@@ -10,7 +12,7 @@ namespace System.Data
         bool IsClosed { get; }
         int RecordsAffected { get; }
         void Close();
-        DataTable GetSchemaTable();
+        DataTable? GetSchemaTable();
         bool NextResult();
         bool Read();
     }
